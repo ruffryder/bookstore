@@ -183,11 +183,11 @@ Hero
 .hero {
   min-height: calc(65vh);
   background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.7) 50%,
-    rgba(255, 255, 255, 0.1)
-  );
-  /* url("./assets/mainBcg.jpeg") center/cover no-repeat; */
+      to right,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(255, 255, 255, 0.1)
+    ),
+    url("./assets/main-bg.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
