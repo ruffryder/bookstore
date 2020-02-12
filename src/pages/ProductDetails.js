@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ProductsContext } from "../context/products";
-// import {CartContext} from '../context/cart';
+import { CartContext } from "../context/cart";
 import { useHistory } from "react-router-dom";
 import Loading from "../components/Loading";
 
@@ -9,6 +9,7 @@ export default function ProductDetails() {
   const { id } = useParams();
   const history = useHistory();
   const { products } = useContext(ProductsContext);
+  const { addToCart } = useContext(CartContext);
   const product = products.find(item => item.id === +id);
   if (products.length === 0) {
     return <Loading />;
@@ -28,7 +29,7 @@ export default function ProductDetails() {
           <p>{description}</p>
           <button
             onClick={() => {
-              //add item to cart
+              addToCart(product);
               history.push("/cart");
             }}
             className="btn btn-primary btn-block"

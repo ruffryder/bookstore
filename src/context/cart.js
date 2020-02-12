@@ -20,17 +20,60 @@ function CartProvider({ children }) {
     setTotal(newTotal);
   }, [cart]);
 
-  const removeItem = id => {};
+  const removeItem = id => {
+    setCart([...cart].filter(item => item.id !== id));
+  };
 
-  const increaseAmount = id => {};
-  const decreaseAmount = id => {};
+  const increaseAmount = id => {
+    setCart(
+      [...cart].map(item =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : { ...item }
+      )
+    );
+  };
+  const decreaseAmount = (id, amount) => {
+    if (amount === 1) {
+      removeItem(id);
+      return;
+    } else {
+      setCart(
+        [...cart].map(item =>
+          item.id === id ? { ...item, amount: item.amount - 1 } : { ...item }
+        )
+      );
+    }
+  };
 
-  const addToCart = product => {};
+  const addToCart = product => {
+    const { id, image, title, price } = product;
+    const item = [...cart].find(item => item.id === id);
+    if (item) {
+      increaseAmount(id);
+      return;
+    } else {
+      const newItem = { id, image, title, price, amount: 1 };
+      const newCart = [...cart, newItem];
+      setCart(newCart);
+    }
+  };
 
-  const clearCart = () => {};
+  const clearCart = () => {
+    setCart([]);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, total, cartItems }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        total,
+        cartItems,
+        removeItem,
+        increaseAmount,
+        decreaseAmount,
+        addToCart,
+        clearCart
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
