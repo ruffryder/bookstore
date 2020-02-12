@@ -11,7 +11,11 @@ export default function ProductsProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [featured, setFeatured] = useState([]);
   useEffect(() => {
-    axios.get(`${url}/products`).then(res => setProducts(res.data));
+    setLoading(true);
+    axios.get(`${url}/products`).then(res => {
+      setProducts(res.data);
+      setLoading(false);
+    });
     return () => {};
   }, []);
   return (
