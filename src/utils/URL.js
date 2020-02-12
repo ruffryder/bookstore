@@ -1,2 +1,4 @@
 // url
-export default "https://cors-anywhere.herokuapp.com/http://johnsmilgatutorials.com/projects/react-tech-store-v2";
+export default "http://localhost:3001";
+
+// "https://cors-anywhere.herokuapp.com/http://johnsmilgatutorials.com/projects/react-tech-store-v2"
