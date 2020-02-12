@@ -12,5 +12,22 @@ export default function Cart() {
   if (cart.length === 0) {
     return <EmptyCart />;
   }
-  return <h1>hello from cart page</h1>;
+  return (
+    <section className="cart-items section">
+      <h2>Your cart</h2>
+      {cart.map(item => {
+        return <CartItem key={item.id} {...item} />;
+      })}
+      <h2>total: ${total}</h2>
+      {user ? (
+        <Link to="/checkout" className="btn btn-primary btn-block">
+          Checkout
+        </Link>
+      ) : (
+        <Link to="/login" className="btn btn-primary btn-block">
+          Login
+        </Link>
+      )}
+    </section>
+  );
 }
