@@ -24,7 +24,7 @@ export default function Login() {
     e.preventDefault();
     let response;
     if (isMember) {
-      // response = await loginUser
+      response = await loginUser({ email, password });
     } else {
       response = await registerUser({ email, password, username });
     }
