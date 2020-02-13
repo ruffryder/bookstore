@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
+import { UserContext } from "../context/user";
 
-export default function PrivateRoute() {
-  return <h1>hello from private route</h1>;
+export default function PrivateRoute({ children, ...rest }) {
+  const { user } = useContext(UserContext);
+  return (
+    <Route
+      {...rest}
+      render={() => (user.token ? children : <Redirect to="/login" />)}
+    ></Route>
+  );
 }

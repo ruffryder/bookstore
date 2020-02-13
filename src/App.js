@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Header from "./components/Header";
 import Alert from "./components/Alert";
+import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   return (
@@ -20,7 +21,9 @@ export default function App() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
+        <PrivateRoute path="/checkout">
+          <Checkout />
+        </PrivateRoute>
         <Route path="/login" component={Login} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={ProductDetails} />
