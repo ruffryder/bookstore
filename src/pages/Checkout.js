@@ -4,8 +4,14 @@ import { UserContext } from "../context/user";
 import { useHistory } from "react-router-dom";
 import EmptyCart from "../components/Cart/EmptyCart";
 import submitOrder from "../strapi/submitOrder";
+import {
+  CardElement,
+  StripeProvider,
+  Elements,
+  injectStripe
+} from "react-stripe-elements";
 
-export default function Checkout(props) {
+function Checkout(props) {
   const { cart, total, clearCart } = useContext(CartContext);
   const { user, showAlert, alert, hideAlert } = useContext(UserContext);
   const history = useHistory();
@@ -13,7 +19,37 @@ export default function Checkout(props) {
   const [error, setError] = useState("");
   const isEmpty = !name || alert.show;
   async function handleSubmit(e) {
+    showAlert({ message: "processing order..." });
     e.preventDefault();
+    const response = await props.stripe
+      .createToken()
+      .catch(error => console.log(error));
+    const { token } = response;
+    if (token) {
+      setError("");
+      const { id } = token;
+      let order = await submitOrder({
+        name,
+        total,
+        items: cart,
+        stripeTokenId: id,
+        userToken: user.token
+      });
+      if (order) {
+        showAlert({ message: "Your order is complete" });
+        clearCart();
+        history.push("/");
+        return;
+      } else {
+        showAlert({
+          message: "There was an error with your order. Please try again",
+          type: "danger"
+        });
+      }
+    } else {
+      hideAlert();
+      setError(response.error.message);
+    }
   }
   if (cart.length < 1) {
     return <EmptyCart />;
@@ -44,6 +80,7 @@ export default function Checkout(props) {
             Enter any 3 digits for the CVC
           </p>
         </div>
+        <CardElement className="card-element"></CardElement>
         {error && <p className="form-empty">{error}</p>}
         {isEmpty ? (
           <p className="form-empty">Please fill out name field</p>
@@ -60,3 +97,17 @@ export default function Checkout(props) {
     </section>
   );
 }
+
+const CardForm = injectStripe(Checkout);
+
+const StripeWrapper = () => {
+  return (
+    <StripeProvider apiKey="pk_test_c4NlzsBKXZuoiXk5M3fVNDAX00lSUzTrLi">
+      <Elements>
+        <CardForm></CardForm>
+      </Elements>
+    </StripeProvider>
+  );
+};
+
+export default StripeWrapper;
