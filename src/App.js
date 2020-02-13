@@ -9,11 +9,13 @@ import Login from "./pages/Login";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Header from "./components/Header";
+import Alert from "./components/Alert";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Alert />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
