@@ -22,14 +22,16 @@ function UserProvider({ children }) {
     message: "",
     type: "success"
   });
-  const showAlert = (message,type='success'){
-    setAlert({show:true});
-  }
-  const hideAlert = ()=>{
-      setAlert({...alert,show:false});
-  }
+  const showAlert = ({ message, type = "success" }) => {
+    setAlert({ show: true, message, type });
+  };
+  const hideAlert = () => {
+    setAlert({ ...alert, show: false });
+  };
   return (
-    <UserContext.Provider value={{ user, userLogin, userLogout,alert,showAlert,hideAlert }}>
+    <UserContext.Provider
+      value={{ user, userLogin, userLogout, alert, showAlert, hideAlert }}
+    >
       {children}
     </UserContext.Provider>
   );

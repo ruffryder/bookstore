@@ -7,13 +7,13 @@ import { UserContext } from "../context/user";
 export default function Login() {
   const history = useHistory();
 
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, alert, showAlert } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("default");
   const [isMember, setIsMember] = useState(true);
 
-  let isEmpty = !email || !password || !username;
+  let isEmpty = !email || !password || !username || alert.show;
 
   const toggleMember = () => {
     setIsMember(prevState => {
@@ -23,6 +23,7 @@ export default function Login() {
     });
   };
   const handleSubmit = async e => {
+    showAlert({ message: "Accessing user data. Please wait..." });
     e.preventDefault();
     let response;
     if (isMember) {
@@ -37,9 +38,13 @@ export default function Login() {
       } = response.data;
       const newUser = { token, username };
       userLogin(newUser);
+      showAlert({ message: `You logged in successfully as ${username}` });
       history.push("/products");
     } else {
-      // show alert
+      showAlert({
+        message: "There was an error. Please try again...",
+        type: "danger"
+      });
     }
   };
   return (
