@@ -22,7 +22,8 @@ export default function ProductsProvider({ children }) {
   useEffect(() => {
     setLoading(true);
     axios.get(`${url}/products`).then(res => {
-      const featured = featuredProducts(flattenProducts(res.data));
+      // get all featured products but take only the first 4
+      const featured = featuredProducts(flattenProducts(res.data)).slice(0, 4);
       const products = flattenProducts(res.data);
       setSorted(paginate(products));
       setProducts(products);
@@ -57,9 +58,7 @@ export default function ProductsProvider({ children }) {
         if (price === 20) {
           return item.price > 20 && item.price < 40;
         }
-        if (price === 40) {
-          return item.price >= 40;
-        }
+        return item.price >= 40;
       });
     }
     setPage(0);

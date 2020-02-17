@@ -6,7 +6,7 @@ export default function Hero({ children }) {
       <div className="banner">
         <h1>Biggest collection of books under one roof</h1>
         <p>find what interests you</p>
-        {children}
+        <div className="text-center">{children}</div>
       </div>
     </div>
   );

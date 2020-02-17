@@ -12,8 +12,8 @@ Variables
 :root {
   /* --primaryColor: #9e3aa3; */
   /* --primaryDarkColor: #4e1d51; */
-  --primaryColor: #f15025;
-  --primaryDarkColor: #c02c03;
+  --primaryColor: #3a539b;
+  --primaryDarkColor: #013243;
   --primaryFont: "Catamaran", sans-serif;
   --slantedFont: "Kaushan Script", cursive;
   --mainWhite: #fff;
@@ -86,6 +86,10 @@ img {
 .loading img {
   width: 10rem;
   margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
 }
 /* 
 ====== 
@@ -184,14 +188,14 @@ Hero
   min-height: calc(65vh);
   background: linear-gradient(
       to right,
-      rgba(0, 0, 0, 0.7) 50%,
+      rgba(0, 0, 0, 0.5) 50%,
       rgba(255, 255, 255, 0.1)
     ),
     url("./assets/main-bg.jpg") center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--primaryDarkColor);
+  color: var(--offWhite);
 }
 .banner {
   width: var(--smallWidth);
@@ -210,13 +214,15 @@ Hero
 .btn-hero {
   border-radius: 0;
   font-weight: bold;
+  display: inline-block;
+  margin-bottom: 20px;
   padding: 0.8rem 1.5rem;
-  background: var(--primaryDarkColor);
-  border-color: var(--primaryDarkColor);
+  background: var(--offWhite);
+  border-color: var(--offWhite);
   color: var(--mainBlack);
 }
 .btn-hero:hover {
-  color: var(--primaryDarkColor);
+  color: var(--offWhite);
 }
 @media screen and (min-width: 768px) {
   .banner {
@@ -224,7 +230,7 @@ Hero
   }
 
   .hero h1 {
-    font-size: 5.3rem;
+    font-size: 4.5rem;
   }
   .hero p {
     font-size: 2.3rem;
@@ -319,6 +325,7 @@ Product List
   position: absolute;
   top: 50%;
   left: 50%;
+  font-weight: bold;
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: var(--mainTransition);
