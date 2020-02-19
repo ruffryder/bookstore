@@ -17,7 +17,7 @@ export default function Cart() {
       {cart.map(item => {
         return <CartItem key={item.id} {...item} />;
       })}
-      <h2>total: ${total}</h2>
+      <h2>total: ${Number(total).toFixed(2)}</h2>
       {user.token ? (
         <Link to="/checkout" className="btn btn-primary btn-block">
           Checkout

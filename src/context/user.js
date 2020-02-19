@@ -25,6 +25,7 @@ function UserProvider({ children }) {
     setUser({ username: null, token: null });
     localStorage.removeItem("user");
   };
+  // Alert State
   const [alert, setAlert] = useState({
     show: false,
     message: "",

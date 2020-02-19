@@ -59,7 +59,7 @@ function Checkout(props) {
       <h2 className="section-title">Checkout</h2>
       <form className="checkout-form">
         <h3>
-          Order total: <span>${total}</span>
+          Order total: <span>${Number(total).toFixed(2)}</span>
         </h3>
         <div className="form-control">
           <label htmlFor="name">Name</label>
