@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { CartContext } from "../../context/cart";
 import img from "../../assets/noimage.gif";
 
-export default function Product({ image, title, id, price }) {
+export default function Product({ product }) {
+  const { addToCart } = useContext(CartContext);
   return (
     <article className="product">
       <div className="img-container">
-        <img src={image} alt={title} />
-        <Link to={`products/${id}`} className="btn btn-primary product-link">
+        <img src={product.image} alt={product.title} />
+        <Link
+          to={`products/${product.id}`}
+          className="btn btn-primary details-link"
+        >
           Details
+        </Link>
+        <Link
+          onClick={() => {
+            addToCart(product);
+          }}
+          className="btn btn-primary add-to-cart-link"
+        >
+          Add to Cart
         </Link>
       </div>
       <div className="product-footer">
-        <p className="product-title">{title}</p>
-        <p className="product-price">${price}</p>
+        <p className="product-title">{product.title}</p>
+        <p className="product-price">${product.price}</p>
       </div>
     </article>
   );
