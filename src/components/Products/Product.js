@@ -16,14 +16,14 @@ export default function Product({ product }) {
         >
           Details
         </Link>
-        <Link
+        <button
           onClick={() => {
             addToCart(product);
           }}
           className="btn btn-primary add-to-cart-link"
         >
           Add to Cart
-        </Link>
+        </button>
       </div>
       <div className="product-footer">
         <p className="product-title">{product.title}</p>
@@ -34,14 +34,18 @@ export default function Product({ product }) {
 }
 
 Product.defaultProps = {
-  title: "No title",
-  image: img,
-  price: 0
+  product: {
+    title: "No title",
+    image: img,
+    price: 0
+  }
 };
 
 Product.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+  })
 };

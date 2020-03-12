@@ -204,7 +204,7 @@ Hero
   max-width: var(--fullWidth);
 }
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2.4rem;
   text-transform: capitalize;
 }
 .hero p {

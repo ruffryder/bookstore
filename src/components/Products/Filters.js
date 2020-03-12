@@ -36,6 +36,7 @@ function Filters() {
               <option value="programming">programming</option>
               <option value="sports and nutrition">sports and nutrition</option>
               <option value="job and career">job and career</option>
+              <option value="ancient history">ancient history</option>
             </select>
           </div>
           <div className="form-group">
