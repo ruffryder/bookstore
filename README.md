@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+It uses React hooks and the Context API to control state.
+Project also relies on packages like react-router-dom for multi-page handling,
+axios for asynchronous calls, prop-types for type checking and css variables for flexible ui changes.
+
 ## Available Scripts
 
 In the project directory, you can run:
